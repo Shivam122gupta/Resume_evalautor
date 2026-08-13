@@ -42,20 +42,20 @@ export const EmptyState: React.FC<Props> = ({ type, onAction }) => {
   const details = getDetails();
 
   return (
-    <div className="flex flex-col items-center justify-center py-2xl px-lg text-center bg-surface-container rounded-xl shadow-sm border border-outline-variant/30 animate-fade-up max-w-lg mx-auto mt-md">
+    <div className="flex flex-col items-center justify-center py-2xl px-lg text-center bg-surface-container rounded-xl shadow-sm border border-outline-variant/30 animate-fade-up max-w-[512px] w-full mx-auto mt-md">
       <span className="material-symbols-outlined text-[48px] text-primary mb-md">
         {details.icon}
       </span>
       <h3 className="font-headline-md text-[20px] font-semibold text-on-surface mb-xs">
         {details.title}
       </h3>
-      <p className="font-body-sm text-body-sm text-on-surface-variant max-w-xs mb-md leading-relaxed">
+      <p className="font-body-sm text-body-sm text-on-surface-variant max-w-[320px] w-full mb-md leading-relaxed">
         {details.desc}
       </p>
       {details.btn && onAction && (
         <button 
           onClick={onAction}
-          className="bg-primary text-on-primary font-label-md px-md py-sm rounded-full shadow-sm hover:bg-primary/95 transition-all active:scale-[0.98] font-semibold"
+          className="bg-primary text-on-primary font-label-md px-md py-sm rounded-full shadow-sm hover:bg-primary/95 transition-all active:scale-[0.98] font-semibold cursor-pointer"
         >
           {details.btn}
         </button>
