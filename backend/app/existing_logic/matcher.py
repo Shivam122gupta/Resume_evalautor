@@ -103,17 +103,13 @@ def final_score(job: JobD, resume: Resume, groq_client, model: str) -> MatchResu
     )
 
     messages = [{"role": "user", "content": prompt}]
-    response_format = {"type": "json_object"}
 
-    response = groq_client.chat.completions.create(
-        model=model,
+    from app.services.llm_service import llm_service
+    data = llm_service.chat_json(
         messages=messages,
-        response_format=response_format,
-        max_completion_tokens=1024,  # 500 was too small — JSON was truncated mid-object (json_validate_failed)
+        max_completion_tokens=800,
+        operation_name="final_score",
     )
-    raw = response.choices[0].message.content
-    logger.debug("Match raw response: %s", raw[:300])
-    data = json.loads(raw)
 
     logger.info(
         "[DIAG] Match result — top-level keys=%s | types=%s",

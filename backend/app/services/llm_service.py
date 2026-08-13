@@ -166,10 +166,11 @@ class LLMService:
                             "Please try again or use a shorter resume."
                         ) from compact_exc
 
-                delay = get_retry_delay(exc, self.retry_delay * attempt * 2)
-                logger.warning("Rate limit hit | attempt=%d | sleeping for %.2fs...", attempt, delay)
-                last_error = exc
-                time.sleep(delay)
+                # HTTP 429 RateLimitError (quota, rate_limit_exceeded): Do not retry
+                raise RuntimeError(
+                    "Resume could not be processed because the AI processing limit was reached. "
+                    "Please try again or use a shorter resume."
+                ) from exc
 
             except APITimeoutError as exc:
                 logger.warning("API timeout | attempt=%d", attempt)
@@ -178,6 +179,14 @@ class LLMService:
 
             except APIError as exc:
                 err_msg = str(exc).lower()
+                
+                # HTTP 429 APIError (quota, rate_limit_exceeded): Do not retry
+                if exc.status_code == 429:
+                    raise RuntimeError(
+                        "Resume could not be processed because the AI processing limit was reached. "
+                        "Please try again or use a shorter resume."
+                    ) from exc
+
                 is_payload_too_large = (
                     exc.status_code == 413 or 
                     "too large" in err_msg or 

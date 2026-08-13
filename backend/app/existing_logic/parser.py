@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 # Total request target: ~6 500 tokens → ~26 000 chars total.
 # System prompt for parse_resume ≈ 350 chars → resume text budget ≈ 7 000 chars.
 # System prompt for parse_job_description ≈ 350 chars → JD budget ≈ 6 000 chars.
-_RESUME_TEXT_CHAR_LIMIT = 7_000   # ~1 750 tokens of resume text
-_JD_TEXT_CHAR_LIMIT     = 6_000   # ~1 500 tokens of JD text
+_RESUME_TEXT_CHAR_LIMIT = 5_000   # ~1 250 tokens of resume text
+_JD_TEXT_CHAR_LIMIT     = 3_000   # ~750 tokens of JD text
 
 
 # ── Pydantic Models (preserved from resume_analyzer.py) ──────────────────────
@@ -211,17 +211,13 @@ def parse_job_description(job_description: str, groq_client, model: str) -> JobD
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
-    response_format = {"type": "json_object"}
 
-    response = groq_client.chat.completions.create(
-        model=model,
+    from app.services.llm_service import llm_service
+    job_data = llm_service.chat_json(
         messages=messages,
-        response_format=response_format,
-        max_completion_tokens=1000,  # JobD JSON: role + 5 lists → needs ~400-500 tokens; 1000 is safe
+        max_completion_tokens=500,
+        operation_name="parse_job_description",
     )
-    raw_json = response.choices[0].message.content
-    logger.debug("Job parse raw response: %s", raw_json[:200])
-    job_data = json.loads(raw_json)
     logger.info(
         "[DIAG] JD parse — top-level keys=%s | types=%s",
         list(job_data.keys()),
@@ -256,17 +252,13 @@ def parse_resume(resume_text: str, groq_client, model: str) -> Resume:
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
-    response_format = {"type": "json_object"}
 
-    response = groq_client.chat.completions.create(
-        model=model,
+    from app.services.llm_service import llm_service
+    data = llm_service.chat_json(
         messages=messages,
-        response_format=response_format,
-        max_completion_tokens=1500,  # Resume JSON with experiences list → needs ~1000-1200 tokens; 1500 is safe
+        max_completion_tokens=1000,
+        operation_name="parse_resume",
     )
-    raw_output = response.choices[0].message.content
-    logger.debug("Resume parse raw response: %s", raw_output[:200])
-    data = json.loads(raw_output)
     logger.info(
         "[DIAG] Resume parse — top-level keys=%s | types=%s",
         list(data.keys()),
