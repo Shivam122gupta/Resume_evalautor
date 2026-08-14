@@ -22,10 +22,17 @@ export async function evaluateResumes(
 
   onProgress?.(`Sending ${files.length} resume(s) to evaluator...`);
 
-  const res = await fetch(`${API_BASE}/api/evaluations`, {
-    method: 'POST',
-    body: formData,
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}/api/evaluations`, {
+      method: 'POST',
+      body: formData,
+    });
+  } catch (err) {
+    throw new Error(
+      'Unable to connect to the evaluation server. Please make sure the backend is running.'
+    );
+  }
 
   if (!res.ok) {
     const errorBody = await res.json().catch(() => ({ detail: 'Unknown error' }));

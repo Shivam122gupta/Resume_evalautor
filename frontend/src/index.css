@@ -1,70 +1,83 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #f7f9fb;
-  --color-tertiary-container: #a44100;
-  --color-on-tertiary-fixed: #351000;
-  --color-inverse-on-surface: #eff1f3;
-  --color-outline-variant: #c7c4d8;
-  --color-secondary-fixed-dim: #bcc7de;
-  --color-secondary-fixed: #d8e3fb;
-  --color-on-secondary-container: #586377;
-  --color-on-secondary: #ffffff;
-  --color-on-primary-fixed-variant: #3323cc;
-  --color-tertiary: #7e3000;
-  --color-error-container: #ffdad6;
-  --color-surface-container: #eceef0;
-  --color-surface-container-high: #e6e8ea;
-  --color-on-primary-fixed: #0f0069;
-  --color-on-tertiary: #ffffff;
-  --color-primary-fixed: #e2dfff;
-  --color-inverse-primary: #c3c0ff;
-  --color-secondary: #545f73;
-  --color-on-error: #ffffff;
-  --color-on-surface-variant: #464555;
-  --color-surface: #f7f9fb;
-  --color-on-secondary-fixed: #111c2d;
-  --color-primary-fixed-dim: #c3c0ff;
-  --color-on-error-container: #93000a;
-  --color-surface-bright: #f7f9fb;
-  --color-surface-container-highest: #e0e3e5;
-  --color-primary-container: #4f46e5;
-  --color-error: #ba1a1a;
-  --color-on-tertiary-container: #ffd2be;
-  --color-on-surface: #191c1e;
-  --color-outline: #777587;
-  --color-on-secondary-fixed-variant: #3c475a;
-  --color-on-primary: #ffffff;
-  --color-secondary-container: #d5e0f8;
-  --color-tertiary-fixed: #ffdbcc;
-  --color-on-tertiary-fixed-variant: #7b2f00;
-  --color-inverse-surface: #2d3133;
-  --color-primary: #3525cd;
-  --color-tertiary-fixed-dim: #ffb695;
-  --color-surface-tint: #4d44e3;
-  --color-surface-container-low: #f2f4f6;
-  --color-on-primary-container: #dad7ff;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-dim: #d8dadc;
-  --color-on-background: #191c1e;
-  --color-surface-variant: #e0e3e5;
+  /* ─── Stitch Ethos Color System ─── */
+  --color-background:                   #f5f3f2;
+  --color-surface:                      #fbf9f8;
+  --color-surface-bright:               #fbf9f8;
+  --color-surface-dim:                  #dbdad9;
+  --color-surface-variant:              #e4e2e2;
+  --color-surface-container-lowest:     #ffffff;
+  --color-surface-container-low:        #f5f3f2;
+  --color-surface-container:            #efeded;
+  --color-surface-container-high:       #e9e8e7;
+  --color-surface-container-highest:    #e4e2e2;
 
-  --radius-DEFAULT: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-full: 9999px;
+  --color-primary:                      #1b1b1b;
+  --color-primary-container:            #1d1d1d;
+  --color-primary-fixed:                #e5e2e1;
+  --color-primary-fixed-dim:            #c8c6c5;
+  --color-on-primary:                   #ffffff;
+  --color-on-primary-container:         #868584;
+  --color-on-primary-fixed:             #1b1b1b;
+  --color-on-primary-fixed-variant:     #474746;
+  --color-inverse-primary:              #c8c6c5;
 
-  --spacing-sm: 8px;
-  --spacing-margin-desktop: 32px;
-  --spacing-max-width: 1280px;
-  --spacing-base: 4px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-2xl: 48px;
-  --spacing-margin-mobile: 16px;
-  --spacing-xs: 4px;
-  --spacing-gutter: 16px;
-  --spacing-xl: 32px;
+  --color-secondary:                    #7d562d;
+  --color-secondary-container:          #ffca98;
+  --color-secondary-fixed:              #ffdcbd;
+  --color-secondary-fixed-dim:          #f0bd8b;
+  --color-on-secondary:                 #ffffff;
+  --color-on-secondary-container:       #7a532a;
+  --color-on-secondary-fixed:           #2c1600;
+  --color-on-secondary-fixed-variant:   #623f18;
+
+  --color-tertiary:                     #030303;
+  --color-tertiary-container:           #1e1d1c;
+  --color-tertiary-fixed:               #e6e2df;
+  --color-tertiary-fixed-dim:           #cac6c4;
+  --color-on-tertiary:                  #ffffff;
+  --color-on-tertiary-container:        #878583;
+  --color-on-tertiary-fixed:            #1c1b1a;
+  --color-on-tertiary-fixed-variant:    #484645;
+
+  --color-error:                        #ba1a1a;
+  --color-error-container:              #ffdad6;
+  --color-on-error:                     #ffffff;
+  --color-on-error-container:           #93000a;
+
+  --color-on-background:                #1b1c1c;
+  --color-on-surface:                   #1b1c1c;
+  --color-on-surface-variant:           #5c5f60;
+
+  --color-outline:                      #888b8b;
+  --color-outline-variant:              #dedad9;
+
+  --color-inverse-surface:              #303031;
+  --color-inverse-on-surface:           #f2f0f0;
+  --color-surface-tint:                 #5f5e5e;
+
+  /* ─── Spacing ─── */
+  --spacing-xs:               4px;
+  --spacing-sm:               8px;
+  --spacing-md:               16px;
+  --spacing-lg:               24px;
+  --spacing-xl:               40px;
+  --spacing-2xl:              64px;
+  --spacing-gutter:           24px;
+  --spacing-margin-mobile:    16px;
+  --spacing-margin-desktop:   48px;
+  --spacing-max-width:        1280px;
+  --spacing-sidebar-width:    256px;
+
+  /* ─── Border Radius ─── */
+  --radius-DEFAULT:   2px;
+  --radius-sm:        4px;
+  --radius-md:        6px;
+  --radius-lg:        8px;
+  --radius-xl:        12px;
+  --radius-2xl:       16px;
+  --radius-full:      9999px;
 }
 
 @layer base {
@@ -76,158 +89,450 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: contain;
   }
 
   body {
-    background-color: #f7f9fb;
-    color: #191c1e;
+    background-color: #f5f3f2;
+    color: #1b1c1c;
     font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.5;
-    min-height: 100vh;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Material symbols adjustments */
+/* ─── Safe area utilities ─── */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pt-safe { padding-top: env(safe-area-inset-top); }
+
+/* ─── Material Symbols ─── */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   display: inline-block;
   vertical-align: middle;
   line-height: 1;
+  user-select: none;
 }
 
-/* Stitch Typography Classes */
-.font-headline-xl {
-  font-family: 'Inter', sans-serif;
+/* ─── Typography System ─── */
+
+/* Display — Source Serif 4 */
+.font-display {
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
-.font-headline-lg {
-  font-family: 'Inter', sans-serif;
+
+.font-headline-xl {
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 32px;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
-.font-headline-lg-mobile {
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
+
+.font-headline-lg {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.font-headline-lg-mobile {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: -0.01em;
 }
+
 .font-headline-md {
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
-}
-.font-body-lg {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 18px;
-  font-weight: 400;
-  line-height: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
 }
-.font-body-md {
+
+.font-headline-sm {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* Body — Inter */
+.font-body-lg {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1.6;
 }
-.font-body-sm {
+
+.font-body-md {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.55;
 }
+
+.font-body-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Label — Inter */
+.font-label-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
 .font-label-md {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 16px;
+  line-height: 1;
   letter-spacing: 0.01em;
 }
+
 .font-label-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ─── Scrollbar hide ─── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Card system ─── */
+
+/* Primary white card */
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #dedad9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(27,28,28,0.05);
+}
+
+/* Surface card (used for most content blocks) */
+.surface-card {
+  background: #ffffff;
+  border: 1px solid #dedad9;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(27,28,28,0.04);
+  padding: 24px;
+}
+
+/* Flat section card with no shadow */
+.section-card {
+  background: #ffffff;
+  border: 1px solid #dedad9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ─── Primary button ─── */
+.btn-primary {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 20px rgba(27,27,27,0.18);
+  transform: translateY(-1px);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.99) translateY(0);
+  box-shadow: none;
+  background-color: #111111;
+}
+.btn-primary:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Secondary button ─── */
+.btn-secondary {
+  background-color: #ffffff;
+  color: #1b1c1c;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #dedad9;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-secondary:hover {
+  background-color: #f5f3f2;
+  border-color: #b8b5b3;
+}
+.btn-secondary:active {
+  background-color: #efeded;
+}
+
+/* ─── Destructive text button ─── */
+.btn-danger {
+  background: none;
+  color: #ba1a1a;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.02em;
-}
-
-/* Scrollbar hide utility */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Backward compatibility classes mapped to Stitch Design System */
-.glass-card {
-  background: #ffffff;
-  border: 1px solid rgba(199, 196, 216, 0.5);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
-}
-
-.btn-primary {
-  background-color: #3525cd;
-  color: #ffffff;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 9999px;
-  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(186,26,26,0.25);
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
+  transition: background-color 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
-.btn-primary:hover:not(:disabled) {
-  background-color: #4f46e5;
-  box-shadow: 0 4px 12px rgba(53, 37, 205, 0.2);
-}
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.btn-danger:hover {
+  background: rgba(186,26,26,0.05);
 }
 
-.btn-secondary {
-  background-color: #ffffff;
-  color: #545f73;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 9999px;
-  border: 1px solid #c7c4d8;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
-}
-.btn-secondary:hover {
-  background-color: #f2f4f6;
-}
-
+/* ─── Textarea / Input ─── */
 .input-area {
   background-color: #ffffff;
-  border: 1px solid #c7c4d8;
-  border-radius: 8px;
-  color: #191c1e;
+  border: 1px solid #dedad9;
+  border-radius: 6px;
+  color: #1b1c1c;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
-  padding: 12px;
-  transition: all 0.2s ease;
+  line-height: 1.6;
+  padding: 14px 16px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none;
+  width: 100%;
 }
 .input-area:focus {
-  border-color: #3525cd;
-  box-shadow: 0 0 0 2px rgba(53, 37, 205, 0.15);
+  border-color: #1b1b1b;
+  box-shadow: 0 0 0 3px rgba(27,27,27,0.07);
+}
+.input-area::placeholder {
+  color: #9a9d9d;
 }
 
+/* ─── Section label ─── */
 .section-label {
-  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
   font-weight: 600;
-  color: #545f73;
+  color: #888b8b;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  letter-spacing: 0.07em;
+}
+
+/* ─── Score Badges ─── */
+.badge-strong {
+  background: #1b1b1b;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.badge-good {
+  background: #efeded;
+  color: #1b1c1c;
+  border: 1px solid #dedad9;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-warn {
+  background: #fef9ec;
+  color: #7a5800;
+  border: 1px solid #f0dfa0;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-low {
+  background: #fff5f5;
+  color: #93000a;
+  border: 1px solid #fecaca;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ─── Sidebar ─── */
+/* The sidebar is position:fixed, so it is removed from normal document flow.
+   Using display:block + margin-left on .main-content is the correct approach
+   for a fixed sidebar — CSS Grid auto-placement would put main in column 1
+   (256px) since all other grid items are also fixed (out of flow). */
+@media (min-width: 1024px) {
+  .app-shell {
+    display: block;
+    min-height: 100dvh;
+    width: 100%;
+  }
+  .sidebar {
+    display: flex;
+  }
+  .bottom-nav {
+    display: none !important;
+  }
+  .mobile-header {
+    display: none !important;
+  }
+  .main-content {
+    margin-left: 256px;
+    width: calc(100% - 256px);
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 48px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .app-shell {
+    display: block;
+  }
+  .sidebar {
+    display: none !important;
+  }
+  .bottom-nav {
+    display: flex !important;
+  }
+  .mobile-header {
+    display: flex !important;
+  }
+  .main-content {
+    padding-top: 60px;
+    padding-bottom: 88px;
+  }
+}
+
+/* ─── Fade-up animation ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.24s ease-out both;
+}
+
+/* ─── Skill pills ─── */
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #f5f3f2;
+  border: 1px solid #dedad9;
+  color: #1b1c1c;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.skill-pill-match {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+.skill-pill-missing {
+  background: #fff5f5;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+/* ─── Score ring ─── */
+.score-ring-track {
+  stroke: #e4e2e2;
+}
+.score-ring-fill {
+  stroke: #1b1b1b;
+  transition: stroke-dasharray 0.9s ease-out;
+}
+
+/* ─── Progress bar ─── */
+.progress-track {
+  background: #efeded;
+  border-radius: 3px;
+  height: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: #1b1b1b;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.7s ease-out;
+}
+
+/* ─── Divider list item ─── */
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #dedad9;
+}
+.list-row:last-child {
+  border-bottom: none;
+}
+
+/* ─── Candidate initials avatar ─── */
+.candidate-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background: #f5f3f2;
+  border: 1px solid #dedad9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444748;
 }

@@ -12,29 +12,29 @@ export const EmptyState: React.FC<Props> = ({ type, onAction }) => {
           icon: 'rocket_launch',
           title: 'Start your first evaluation',
           desc: 'Paste a job description and upload candidate resumes to screen them with AI.',
-          btn: 'Get Started'
+          btn: 'Get Started',
         };
       case 'history':
         return {
           icon: 'history',
           title: 'No evaluation history',
           desc: 'Completed evaluations will be saved here so you can access them later.',
-          btn: null
+          btn: null,
         };
       case 'no-resumes':
         return {
           icon: 'upload_file',
           title: 'No resumes uploaded',
           desc: 'Please upload at least one PDF or DOCX resume to perform an evaluation.',
-          btn: null
+          btn: null,
         };
       case 'no-results':
       default:
         return {
           icon: 'group_off',
           title: 'No candidates evaluated yet',
-          desc: 'Perform an evaluation on the Dashboard to see candidate match scores.',
-          btn: 'Go to Dashboard'
+          desc: 'Perform an evaluation on the Evaluate tab to see candidate match scores here.',
+          btn: 'Go to Evaluate',
         };
     }
   };
@@ -42,20 +42,67 @@ export const EmptyState: React.FC<Props> = ({ type, onAction }) => {
   const details = getDetails();
 
   return (
-    <div className="flex flex-col items-center justify-center py-2xl px-lg text-center bg-surface-container rounded-xl shadow-sm border border-outline-variant/30 animate-fade-up max-w-[512px] w-full mx-auto mt-md">
-      <span className="material-symbols-outlined text-[48px] text-primary mb-md">
-        {details.icon}
-      </span>
-      <h3 className="font-headline-md text-[20px] font-semibold text-on-surface mb-xs">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '64px 24px',
+        textAlign: 'center',
+        maxWidth: 320,
+        margin: '0 auto',
+      }}
+      className="animate-fade-up"
+    >
+      <div
+        style={{
+          width: 56,
+          height: 56,
+          borderRadius: 10,
+          background: '#f5f3f2',
+          border: '1px solid #dedad9',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 18,
+        }}
+      >
+        <span
+          className="material-symbols-outlined text-on-surface-variant"
+          style={{ fontSize: 24 }}
+        >
+          {details.icon}
+        </span>
+      </div>
+      <h3
+        style={{
+          fontFamily: 'Source Serif 4, Georgia, serif',
+          fontSize: 17,
+          fontWeight: 600,
+          color: '#1b1c1c',
+          letterSpacing: '-0.005em',
+          marginBottom: 8,
+        }}
+      >
         {details.title}
       </h3>
-      <p className="font-body-sm text-body-sm text-on-surface-variant max-w-[320px] w-full mb-md leading-relaxed">
+      <p
+        style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 13,
+          color: '#5c5f60',
+          lineHeight: 1.6,
+          marginBottom: 24,
+        }}
+      >
         {details.desc}
       </p>
       {details.btn && onAction && (
-        <button 
+        <button
           onClick={onAction}
-          className="bg-primary text-on-primary font-label-md px-md py-sm rounded-full shadow-sm hover:bg-primary/95 transition-all active:scale-[0.98] font-semibold cursor-pointer"
+          className="btn-primary"
+          style={{ width: 'auto', padding: '12px 28px', fontSize: 14, minHeight: 44 }}
         >
           {details.btn}
         </button>

@@ -17,10 +17,11 @@ export const ExportButton: React.FC<Props> = ({ response }) => {
     <button
       id="export-csv-btn"
       onClick={handleExport}
-      className="flex items-center gap-xs bg-surface text-on-surface font-label-sm text-label-sm px-md py-sm rounded-full shadow-sm hover:bg-surface-container transition-colors border border-outline-variant/60"
+      aria-label="Export results as CSV"
+      className="btn-secondary shrink-0"
       title="Download results as CSV"
     >
-      <span className="material-symbols-outlined text-[18px]">download</span>
+      <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>download</span>
       <span>Export CSV</span>
     </button>
   );

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
 import { JobDescriptionInput } from './components/JobDescriptionInput';
 import { ResumeUpload } from './components/ResumeUpload';
 import { EvaluateButton } from './components/EvaluateButton';
@@ -12,45 +13,229 @@ import { Navbar } from './components/Navbar';
 import { evaluateResumes } from './api/client';
 import type { EvaluationResponse, UploadedFile, CandidateResult } from './types';
 
+type Tab = 'dashboard' | 'evaluations' | 'candidates' | 'history';
+
 let fileIdCounter = 0;
 
+// ─── Dashboard page (evaluation form + results) ────────────────────────────
+function DashboardPage({
+  jobDescription,
+  setJobDescription,
+  uploadedFiles,
+  handleAddFiles,
+  handleRemoveFile,
+  loading,
+  progressMessage,
+  error,
+  result,
+  isEvalDisabled,
+  handleEvaluate,
+  onSelectCandidate,
+  onNewEvaluation,
+}: {
+  jobDescription: string;
+  setJobDescription: (v: string) => void;
+  uploadedFiles: UploadedFile[];
+  handleAddFiles: (files: File[]) => void;
+  handleRemoveFile: (id: string) => void;
+  loading: boolean;
+  progressMessage: string;
+  error: string | null;
+  result: EvaluationResponse | null;
+  isEvalDisabled: boolean;
+  handleEvaluate: () => void;
+  onSelectCandidate: (c: CandidateResult) => void;
+  onNewEvaluation: () => void;
+}) {
+  if (result && !loading) {
+    return (
+      <div className="flex flex-col gap-6">
+        {/* "New evaluation" link */}
+        <div className="flex justify-end">
+          <button
+            onClick={onNewEvaluation}
+            className="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors"
+            style={{
+              fontSize: 12,
+              fontFamily: 'Inter, sans-serif',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 15 }}>add_circle</span>
+            New Evaluation
+          </button>
+        </div>
+        <CandidateRanking response={result} onSelectCandidate={onSelectCandidate} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-5">
+      {/* Intro header */}
+      {!loading && (
+        <div style={{ paddingTop: 4 }}>
+          <h1
+            style={{
+              fontFamily: 'Source Serif 4, Georgia, serif',
+              fontSize: 22,
+              fontWeight: 600,
+              color: '#1b1c1c',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Evaluate Candidates
+          </h1>
+          <p style={{ fontSize: 13, fontFamily: 'Inter, sans-serif', color: '#5c5f60', marginTop: 5 }}>
+            Analyze resumes against your job requirements using AI.
+          </p>
+        </div>
+      )}
+
+      {/* Loading state */}
+      {loading && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '48px 0',
+            gap: 18,
+          }}
+        >
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              background: '#1b1b1b',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span
+              className="animate-spin"
+              style={{
+                width: 24,
+                height: 24,
+                border: '2px solid rgba(255,255,255,0.2)',
+                borderTopColor: '#ffffff',
+                borderRadius: '50%',
+                display: 'block',
+              }}
+            />
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <p
+              style={{
+                fontFamily: 'Source Serif 4, Georgia, serif',
+                fontSize: 16,
+                fontWeight: 600,
+                color: '#1b1c1c',
+                letterSpacing: '-0.005em',
+              }}
+            >
+              Evaluating resumes…
+            </p>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: '#888b8b', marginTop: 5 }}>
+              {progressMessage || 'Connecting to AI evaluator…'}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Form */}
+      {!loading && (
+        <>
+          <JobDescriptionInput
+            value={jobDescription}
+            onChange={setJobDescription}
+            disabled={loading}
+          />
+          <ResumeUpload
+            files={uploadedFiles}
+            onAdd={handleAddFiles}
+            onRemove={handleRemoveFile}
+            disabled={loading}
+          />
+
+          {/* Error */}
+          {error && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 12,
+                padding: '14px 16px',
+                borderRadius: 8,
+                background: 'rgba(186,26,26,0.05)',
+                border: '1px solid rgba(186,26,26,0.2)',
+              }}
+            >
+              <span className="material-symbols-outlined text-error shrink-0" style={{ fontSize: 16, marginTop: 1 }}>warning</span>
+              <div>
+                <p style={{ fontSize: 13, fontFamily: 'Inter, sans-serif', fontWeight: 600, color: '#ba1a1a' }}>
+                  Validation Error
+                </p>
+                <p style={{ fontSize: 12, fontFamily: 'Inter, sans-serif', color: '#5c5f60', marginTop: 3 }}>
+                  {error}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <EvaluateButton
+            loading={loading}
+            disabled={isEvalDisabled}
+            progressMessage={progressMessage}
+            onClick={handleEvaluate}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── App Shell ─────────────────────────────────────────────────────────────
 export default function App() {
-  // Navigation State
-  const [currentTab, setCurrentTab] = useState<'dashboard' | 'evaluations' | 'candidates'>('dashboard');
+  // Navigation
+  const [currentTab, setCurrentTab] = useState<Tab>('evaluations');
   const [selectedCandidate, setSelectedCandidate] = useState<CandidateResult | null>(null);
 
-  // Form State
+  // Form state
   const [jobDescription, setJobDescription] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
-  
-  // Pipeline State
+
+  // Pipeline state
   const [loading, setLoading] = useState(false);
   const [progressMessage, setProgressMessage] = useState('');
   const [result, setResult] = useState<EvaluationResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // History State
+  // History
   const [historyRecords, setHistoryRecords] = useState<EvaluationRecord[]>([]);
 
-  // Load history from localStorage on mount
+  // Load history
   useEffect(() => {
     try {
       const stored = localStorage.getItem('resume_evaluator_history');
-      if (stored) {
-        setHistoryRecords(JSON.parse(stored));
-      }
+      if (stored) setHistoryRecords(JSON.parse(stored));
     } catch (e) {
-      console.error('Failed to load history from localStorage', e);
+      console.error('Failed to load history', e);
     }
   }, []);
 
-  // Save history helper
   const saveHistory = (newRecords: EvaluationRecord[]) => {
     setHistoryRecords(newRecords);
     try {
       localStorage.setItem('resume_evaluator_history', JSON.stringify(newRecords));
     } catch (e) {
-      console.error('Failed to save history to localStorage', e);
+      console.error('Failed to save history', e);
     }
   };
 
@@ -86,7 +271,7 @@ export default function App() {
     }
 
     setLoading(true);
-    setProgressMessage('Connecting to evaluator...');
+    setProgressMessage('Connecting to evaluator…');
 
     try {
       const response = await evaluateResumes(
@@ -96,20 +281,14 @@ export default function App() {
       );
       setResult(response);
       setProgressMessage('');
-      
-      // Save to history
+
       const newRecord: EvaluationRecord = {
         id: `eval-${Date.now()}`,
-        date: new Date().toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric',
-        }),
+        date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
         role: response.job.role || 'Software Engineer',
-        response: response
+        response,
       };
       saveHistory([newRecord, ...historyRecords]);
-
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'An unexpected error occurred.';
       setError(msg);
@@ -118,144 +297,216 @@ export default function App() {
     }
   };
 
-  const isEvalDisabled =
-    loading || !jobDescription.trim() || uploadedFiles.length === 0;
+  const isEvalDisabled = loading || !jobDescription.trim() || uploadedFiles.length === 0;
 
-  // Header Title Resolver
-  const getHeaderTitle = () => {
-    if (selectedCandidate) {
-      return 'Candidate Detail';
-    }
-    switch (currentTab) {
-      case 'evaluations':
-        return 'Evaluation History';
-      case 'candidates':
-        return 'Candidates';
-      case 'dashboard':
-      default:
-        return result ? 'Evaluation Results' : 'Dashboard';
-    }
+  const handleTabChange = (tab: Tab) => {
+    setSelectedCandidate(null);
+    setCurrentTab(tab);
   };
 
-  // Back button resolver (only when looking at a candidate details view)
-  const handleBack = selectedCandidate ? () => setSelectedCandidate(null) : undefined;
+  const handleNewEvaluation = () => {
+    setResult(null);
+    setUploadedFiles([]);
+    setError(null);
+  };
 
+  // ── Candidate detail view ────────────────────────────────────────────────
+  if (selectedCandidate) {
+    return (
+      <div className="app-shell bg-background">
+        {/* Desktop sidebar */}
+        <Sidebar currentTab={currentTab} onTabChange={handleTabChange} />
+
+        {/* Mobile header */}
+        <Header onBack={() => setSelectedCandidate(null)} title="Candidate Profile" />
+
+        {/* Content */}
+        <main className="main-content w-full">
+          <div
+            style={{
+              paddingLeft: 'max(16px, env(safe-area-inset-left))',
+              paddingRight: 'max(16px, env(safe-area-inset-right))',
+              maxWidth: 720,
+              margin: '0 auto',
+            }}
+            className="lg:pl-10 lg:pr-8 lg:pt-10"
+          >
+            {/* Desktop back button */}
+            <div className="hidden lg:block mb-5">
+              <button
+                onClick={() => setSelectedCandidate(null)}
+                className="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors"
+                style={{
+                  fontSize: 13,
+                  fontFamily: 'Inter, sans-serif',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_back</span>
+                Back to Results
+              </button>
+            </div>
+            <CandidateDetails
+              candidate={selectedCandidate}
+              onBack={() => setSelectedCandidate(null)}
+            />
+          </div>
+        </main>
+
+        {/* Mobile bottom nav */}
+        <Navbar currentTab={currentTab} onTabChange={handleTabChange} />
+      </div>
+    );
+  }
+
+  // ── Main app shell ────────────────────────────────────────────────────────
   return (
-    <div className="bg-background min-h-screen text-on-surface font-body-md">
-      {/* Sticky header */}
-      <Header title={getHeaderTitle()} onBack={handleBack} />
+    <div className="app-shell bg-background min-h-screen">
+      {/* Desktop sidebar */}
+      <Sidebar currentTab={currentTab} onTabChange={handleTabChange} />
 
-      {/* Main container with bottom nav safe area padding */}
-      <main className="relative w-full pt-20 pb-32 max-w-[1280px] mx-auto px-margin-mobile">
-        
-        {/* If selectedCandidate is active, render detailed profile view */}
-        {selectedCandidate ? (
-          <CandidateDetails 
-            candidate={selectedCandidate} 
-            onBack={() => setSelectedCandidate(null)} 
-          />
-        ) : (
-          /* Render tabbed views */
-          <>
+      {/* Mobile top header */}
+      <Header />
+
+      {/* Main content area */}
+      <main className="main-content w-full">
+        <div
+          style={{
+            maxWidth: 720,
+            margin: '0 auto',
+          }}
+          className="px-4 lg:px-10 lg:pt-10"
+        >
+
+            {/* ── Evaluate tab (default) ── */}
+            {currentTab === 'evaluations' && (
+              <DashboardPage
+                jobDescription={jobDescription}
+                setJobDescription={setJobDescription}
+                uploadedFiles={uploadedFiles}
+                handleAddFiles={handleAddFiles}
+                handleRemoveFile={handleRemoveFile}
+                loading={loading}
+                progressMessage={progressMessage}
+                error={error}
+                result={result}
+                isEvalDisabled={isEvalDisabled}
+                handleEvaluate={handleEvaluate}
+                onSelectCandidate={setSelectedCandidate}
+                onNewEvaluation={handleNewEvaluation}
+              />
+            )}
+
+            {/* ── Dashboard (quick overview when results exist) ── */}
             {currentTab === 'dashboard' && (
-              <div className="flex flex-col gap-lg w-full">
-                
-                {/* Intro Title & Description when no results yet */}
-                {!result && !loading && (
-                  <div className="flex flex-col gap-sm pt-md">
-                    <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
-                      AI-powered resume screening
-                    </h1>
-                    <p className="font-body-md text-body-md text-on-surface-variant">
-                      Compare candidates against your job requirements and identify the strongest matches in minutes.
-                    </p>
-                  </div>
-                )}
+              <div className="flex flex-col gap-6 animate-fade-up">
+                <div style={{ paddingTop: 4 }}>
+                  <h1
+                    style={{
+                      fontFamily: 'Source Serif 4, Georgia, serif',
+                      fontSize: 22,
+                      fontWeight: 600,
+                      color: '#1b1c1c',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    Resume Evaluation
+                  </h1>
+                  <p style={{ fontSize: 13, fontFamily: 'Inter, sans-serif', color: '#5c5f60', marginTop: 5 }}>
+                    Evaluate resumes against job requirements and identify the strongest candidates.
+                  </p>
+                </div>
 
-                {/* Main input form */}
-                {!result && (
-                  <div className="flex flex-col gap-lg">
-                    <JobDescriptionInput
-                      value={jobDescription}
-                      onChange={setJobDescription}
-                      disabled={loading}
-                    />
-                    <ResumeUpload
-                      files={uploadedFiles}
-                      onAdd={handleAddFiles}
-                      onRemove={handleRemoveFile}
-                      disabled={loading}
-                    />
-                    {error && (
-                      <div className="bg-error-container/20 rounded-xl p-md border border-error/20 flex items-start gap-sm">
-                        <span className="material-symbols-outlined text-error">warning</span>
-                        <div className="flex flex-col gap-xs">
-                          <span className="font-label-md text-error">Validation Error</span>
-                          <span className="font-body-sm text-on-surface-variant">{error}</span>
-                        </div>
-                      </div>
-                    )}
-                    <EvaluateButton
-                      loading={loading}
-                      disabled={isEvalDisabled}
-                      progressMessage={progressMessage}
-                      onClick={handleEvaluate}
-                    />
-                  </div>
-                )}
-
-                {/* If results exist, display the results ranking view */}
-                {result && !loading && (
-                  <div className="flex flex-col gap-md">
-                    <div className="flex justify-between items-center mb-xs">
-                      <button 
-                        onClick={() => {
-                          setResult(null);
-                          setUploadedFiles([]);
-                        }}
-                        className="flex items-center gap-xs text-primary font-label-md hover:underline bg-none border-none p-0 cursor-pointer"
+                {result ? (
+                  <CandidateRanking response={result} onSelectCandidate={setSelectedCandidate} />
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '56px 0',
+                      gap: 18,
+                      textAlign: 'center',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 56,
+                        height: 56,
+                        borderRadius: 12,
+                        background: '#1b1b1b',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'opacity 0.15s ease',
+                      }}
+                      onClick={() => handleTabChange('evaluations')}
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Go to evaluate"
+                      onKeyDown={(e) => { if (e.key === 'Enter') handleTabChange('evaluations'); }}
+                    >
+                      <span
+                        className="material-symbols-outlined text-surface"
+                        style={{ fontSize: 26, fontVariationSettings: "'FILL' 1" }}
                       >
-                        <span className="material-symbols-outlined text-[18px]">add_circle</span>
-                        <span>Start New Evaluation</span>
-                      </button>
+                        add
+                      </span>
                     </div>
-                    <CandidateRanking 
-                      response={result} 
-                      onSelectCandidate={(c) => setSelectedCandidate(c)} 
-                    />
+                    <div>
+                      <p
+                        style={{
+                          fontFamily: 'Source Serif 4, Georgia, serif',
+                          fontSize: 17,
+                          fontWeight: 600,
+                          color: '#1b1c1c',
+                          letterSpacing: '-0.005em',
+                        }}
+                      >
+                        No evaluations yet
+                      </p>
+                      <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: '#888b8b', marginTop: 5 }}>
+                        Go to the Evaluate tab to get started.
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
             )}
 
-            {currentTab === 'evaluations' && (
+            {/* ── Candidates tab ── */}
+            {currentTab === 'candidates' && (
+              <CandidatesTab
+                response={result}
+                onSelectCandidate={setSelectedCandidate}
+                onGoToDashboard={() => handleTabChange('evaluations')}
+              />
+            )}
+
+            {/* ── History tab ── */}
+            {currentTab === 'history' && (
               <EvaluationHistory
                 records={historyRecords}
                 onClearHistory={handleClearHistory}
                 onSelectRecord={(rec) => {
                   setResult(rec.response);
                   setJobDescription(rec.response.job.responsibilities.join('\n'));
-                  setCurrentTab('dashboard');
+                  handleTabChange('evaluations');
                 }}
               />
             )}
 
-            {currentTab === 'candidates' && (
-              <CandidatesTab
-                response={result}
-                onSelectCandidate={(c) => setSelectedCandidate(c)}
-                onGoToDashboard={() => setCurrentTab('dashboard')}
-              />
-            )}
-          </>
-        )}
+        </div>
       </main>
 
-      {/* Persistent Bottom navigation */}
-      <Navbar currentTab={currentTab} onTabChange={(tab) => {
-        setSelectedCandidate(null);
-        setCurrentTab(tab);
-      }} />
+      {/* Mobile bottom nav */}
+      <Navbar currentTab={currentTab} onTabChange={handleTabChange} />
     </div>
   );
 }

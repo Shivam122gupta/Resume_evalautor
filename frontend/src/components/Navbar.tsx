@@ -1,50 +1,62 @@
+type Tab = 'dashboard' | 'evaluations' | 'candidates' | 'history';
 
 interface Props {
-  currentTab: 'dashboard' | 'evaluations' | 'candidates';
-  onTabChange: (tab: 'dashboard' | 'evaluations' | 'candidates') => void;
+  currentTab: Tab;
+  onTabChange: (tab: Tab) => void;
 }
 
+const NAV_ITEMS: { tab: Tab; icon: string; label: string }[] = [
+  { tab: 'dashboard',   icon: 'dashboard',              label: 'Dashboard' },
+  { tab: 'evaluations', icon: 'add_circle',              label: 'Evaluate' },
+  { tab: 'candidates',  icon: 'supervised_user_circle',  label: 'Candidates' },
+  { tab: 'history',     icon: 'history',                 label: 'History' },
+];
+
 export const Navbar: React.FC<Props> = ({ currentTab, onTabChange }) => {
-  const handleTabClick = (e: React.MouseEvent, tab: 'dashboard' | 'evaluations' | 'candidates') => {
-    e.preventDefault();
-    onTabChange(tab);
-  };
-
   return (
-    <nav className="fixed bottom-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl pb-safe shadow-[0_-1px_8px_rgba(0,0,0,0.04)] border-t border-outline-variant/30">
-      <div className="flex justify-around items-center h-16 max-w-[1280px] mx-auto px-margin-mobile">
-        <a 
-          href="#"
-          onClick={(e) => handleTabClick(e, 'dashboard')}
-          className={`flex flex-col items-center justify-center gap-xs w-20 h-full transition-colors ${
-            currentTab === 'dashboard' ? 'text-primary' : 'text-on-surface-variant hover:text-primary/70'
-          }`}
-        >
-          <span className="material-symbols-outlined font-semibold">home</span>
-          <span className="font-label-sm text-label-sm">Dashboard</span>
-        </a>
-
-        <a 
-          href="#"
-          onClick={(e) => handleTabClick(e, 'evaluations')}
-          className={`flex flex-col items-center justify-center gap-xs w-20 h-full transition-colors ${
-            currentTab === 'evaluations' ? 'text-primary' : 'text-on-surface-variant hover:text-primary/70'
-          }`}
-        >
-          <span className="material-symbols-outlined font-semibold">history_edu</span>
-          <span className="font-label-sm text-label-sm font-medium">Evaluations</span>
-        </a>
-
-        <a 
-          href="#"
-          onClick={(e) => handleTabClick(e, 'candidates')}
-          className={`flex flex-col items-center justify-center gap-xs w-20 h-full transition-colors ${
-            currentTab === 'candidates' ? 'text-primary' : 'text-on-surface-variant hover:text-primary/70'
-          }`}
-        >
-          <span className="material-symbols-outlined font-semibold">group</span>
-          <span className="font-label-sm text-label-sm font-medium">Candidates</span>
-        </a>
+    <nav
+      className="bottom-nav fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest pb-safe"
+      style={{ borderTop: '1px solid #dedad9' }}
+      aria-label="Main navigation"
+    >
+      <div className="flex justify-around items-center h-16 max-w-[640px] mx-auto px-2">
+        {NAV_ITEMS.map(({ tab, icon, label }) => {
+          const active = currentTab === tab;
+          return (
+            <a
+              key={tab}
+              href="#"
+              role="tab"
+              aria-selected={active}
+              aria-label={label}
+              onClick={(e) => { e.preventDefault(); onTabChange(tab); }}
+              className={`flex flex-col items-center justify-center gap-1 py-2 transition-all rounded-lg ${
+                active ? 'text-on-surface' : 'text-on-surface-variant'
+              }`}
+              style={{ minWidth: 56, textDecoration: 'none' }}
+            >
+              <span
+                className="material-symbols-outlined"
+                style={{
+                  fontSize: 22,
+                  fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0",
+                }}
+              >
+                {icon}
+              </span>
+              <span
+                style={{
+                  fontSize: 10,
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: active ? 600 : 500,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {label}
+              </span>
+            </a>
+          );
+        })}
       </div>
     </nav>
   );

@@ -1,42 +1,94 @@
-
 interface Props {
   title?: string;
   onBack?: () => void;
+  currentTab?: string;
 }
 
-export const Header: React.FC<Props> = ({ title = 'Dashboard', onBack }) => {
+export const Header: React.FC<Props> = ({ title = 'HireLens', onBack }) => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/30">
-      <div className="h-16 px-margin-mobile flex items-center justify-between">
-        <div className="flex items-center gap-sm">
+    <header
+      className="mobile-header fixed top-0 left-0 w-full z-50 bg-surface-container-lowest pt-safe"
+      style={{
+        borderBottom: '1px solid #dedad9',
+        boxShadow: '0 1px 0 #dedad9',
+      }}
+    >
+      <div
+        className="px-4 flex items-center justify-between"
+        style={{ height: 56 }}
+      >
+        {/* Left: back or brand */}
+        <div className="flex items-center gap-2 min-w-0">
           {onBack ? (
-            <button 
+            <button
               onClick={onBack}
-              className="w-10 h-10 mr-xs flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container"
+              aria-label="Go back"
+              className="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 13,
+              }}
             >
-              <span className="material-symbols-outlined text-[20px] font-bold">arrow_back_ios_new</span>
+              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_back_ios_new</span>
+              <span
+                className="text-on-surface truncate max-w-[180px]"
+                style={{
+                  fontFamily: 'Source Serif 4, Georgia, serif',
+                  fontSize: 17,
+                  fontWeight: 600,
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {title}
+              </span>
             </button>
           ) : (
-            <img 
-              alt="Resume Evaluator Logo" 
-              className="h-8 w-auto object-contain" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9ScI3ivaVDCduz0mZXfGENP4zw_h8dWEixXfFZ_dPCJSUbxyzOz-9qww2aGWdiXd7z4Aks4UlRb2XGsG6kZ-32GU_Q2LxtACIKCxPepYRpfojmfM86QbxViSDhIlnV8CkPqQN-3cTDdqqGEMGFqTgFczDODhV8L1OYuMvDblfbeo_vsabBolZuMy79m4ZbIYADygTUTqeRPaT1ZYoTTQUlXOfS9JzTY_RmgDD4EwYuf89AvuGe1Oq"
-            />
+            <>
+              <span
+                className="material-symbols-outlined text-on-surface"
+                style={{ fontSize: 20, fontVariationSettings: "'FILL' 1" }}
+              >
+                bar_chart_4_bars
+              </span>
+              <span
+                style={{
+                  fontFamily: 'Source Serif 4, Georgia, serif',
+                  fontSize: 17,
+                  fontWeight: 600,
+                  color: '#1b1c1c',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                HireLens
+              </span>
+            </>
           )}
-          <span className="font-headline-md text-headline-md text-primary truncate max-w-[200px] md:max-w-none">
-            {title}
-          </span>
         </div>
-        
-        <div className="flex items-center gap-md">
-          <button className="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container">
-            <span className="material-symbols-outlined">settings</span>
+
+        {/* Right: notification + avatar */}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            aria-label="Notifications"
+            className="w-9 h-9 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors rounded-md hover:bg-surface-container"
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 20 }}>notifications</span>
           </button>
-          <img 
-            alt="Profile" 
-            className="w-8 h-8 rounded-full object-cover ring-2 ring-primary/10" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4Qev0jjYy1b51EL70X1HKwedcBvGwXgUE9bnxhvfaOFgNMJwq-yGyjCjgEHMPTAush_l9vrjC0qrZZOuo8HYTk_N3ioziqtlF4OAghM8G2Zn3TRzXus68-_N1IROoTaVSkQG0i7ZgvRu-a2QizNFa3smsiKoztIgiolcRUYmlZwfb4GzYkBoG8rRcHvI2E0dsJ4IaBpGvO3er67TEo658qIF4SkO_GNXQGUL500PrkNSOTRXGpSnR"
-          />
+          <div
+            className="w-8 h-8 rounded-full bg-on-surface flex items-center justify-center shrink-0"
+            aria-label="Profile"
+          >
+            <span
+              className="material-symbols-outlined text-surface"
+              style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}
+            >
+              person
+            </span>
+          </div>
         </div>
       </div>
     </header>
