@@ -1,4 +1,4 @@
-type Tab = 'dashboard' | 'evaluations' | 'candidates' | 'history';
+type Tab = 'landing' | 'dashboard' | 'evaluations' | 'candidates' | 'history';
 
 interface Props {
   currentTab: Tab;
@@ -6,6 +6,7 @@ interface Props {
 }
 
 const NAV_ITEMS: { tab: Tab; icon: string; label: string }[] = [
+  { tab: 'landing',     icon: 'home',                   label: 'Home' },
   { tab: 'dashboard',   icon: 'dashboard',              label: 'Dashboard' },
   { tab: 'evaluations', icon: 'add_circle',              label: 'Evaluate' },
   { tab: 'candidates',  icon: 'supervised_user_circle',  label: 'Candidates' },

@@ -1,3 +1,5 @@
+import { Logo } from './Logo';
+
 interface Props {
   title?: string;
   onBack?: () => void;
@@ -47,25 +49,7 @@ export const Header: React.FC<Props> = ({ title = 'HireLens', onBack }) => {
               </span>
             </button>
           ) : (
-            <>
-              <span
-                className="material-symbols-outlined text-on-surface"
-                style={{ fontSize: 20, fontVariationSettings: "'FILL' 1" }}
-              >
-                bar_chart_4_bars
-              </span>
-              <span
-                style={{
-                  fontFamily: 'Source Serif 4, Georgia, serif',
-                  fontSize: 17,
-                  fontWeight: 600,
-                  color: '#1b1c1c',
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                HireLens
-              </span>
-            </>
+            <Logo />
           )}
         </div>
 

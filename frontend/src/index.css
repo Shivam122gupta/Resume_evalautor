@@ -1,61 +1,59 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Stitch Ethos Color System ─── */
-  --color-background:                   #f5f3f2;
-  --color-surface:                      #fbf9f8;
-  --color-surface-bright:               #fbf9f8;
-  --color-surface-dim:                  #dbdad9;
-  --color-surface-variant:              #e4e2e2;
+  /* ─── Claude Theme Color System ─── */
+  --color-background:                   #f9f6f0; /* Signature Claude warm cream paper */
+  --color-surface:                      #fbfaf7;
+  --color-surface-bright:               #ffffff;
+  --color-surface-dim:                  #e6dfd5; /* Stone divider tint */
+  --color-surface-variant:              #f4f0ea; /* Soft container tint */
   --color-surface-container-lowest:     #ffffff;
-  --color-surface-container-low:        #f5f3f2;
-  --color-surface-container:            #efeded;
-  --color-surface-container-high:       #e9e8e7;
-  --color-surface-container-highest:    #e4e2e2;
+  --color-surface-container-low:        #fbfaf7;
+  --color-surface-container:            #f4f0ea;
+  --color-surface-container-high:       #ede8df;
+  --color-surface-container-highest:    #e6dfd5;
 
-  --color-primary:                      #1b1b1b;
-  --color-primary-container:            #1d1d1d;
-  --color-primary-fixed:                #e5e2e1;
-  --color-primary-fixed-dim:            #c8c6c5;
+  --color-primary:                      #1d1816; /* Deep aubergine-tinted slate */
+  --color-primary-container:            #2a221f;
+  --color-primary-fixed:                #ebdcd0;
+  --color-primary-fixed-dim:            #cfae96;
   --color-on-primary:                   #ffffff;
-  --color-on-primary-container:         #868584;
-  --color-on-primary-fixed:             #1b1b1b;
-  --color-on-primary-fixed-variant:     #474746;
-  --color-inverse-primary:              #c8c6c5;
+  --color-on-primary-container:         #887d77;
+  --color-on-primary-fixed:             #1d1816;
+  --color-on-primary-fixed-variant:     #4d4440;
+  --color-inverse-primary:              #cfae96;
 
-  --color-secondary:                    #7d562d;
-  --color-secondary-container:          #ffca98;
-  --color-secondary-fixed:              #ffdcbd;
-  --color-secondary-fixed-dim:          #f0bd8b;
+  --color-secondary:                    #cc5a37; /* Signature Claude clay-rust coral */
+  --color-secondary-container:          #ffdcd1;
+  --color-secondary-fixed:              #ffdcd1;
+  --color-secondary-fixed-dim:          #f0ac95;
   --color-on-secondary:                 #ffffff;
-  --color-on-secondary-container:       #7a532a;
-  --color-on-secondary-fixed:           #2c1600;
-  --color-on-secondary-fixed-variant:   #623f18;
+  --color-on-secondary-container:       #7d2a13;
+  --color-on-secondary-fixed:           #2d0901;
+  --color-on-secondary-fixed-variant:   #682513;
 
-  --color-tertiary:                     #030303;
-  --color-tertiary-container:           #1e1d1c;
-  --color-tertiary-fixed:               #e6e2df;
-  --color-tertiary-fixed-dim:           #cac6c4;
+  --color-tertiary:                     #cc5a37;
+  --color-tertiary-container:           #ffdcd1;
+  --color-tertiary-fixed:               #ffdcd1;
+  --color-tertiary-fixed-dim:           #f0ac95;
   --color-on-tertiary:                  #ffffff;
-  --color-on-tertiary-container:        #878583;
-  --color-on-tertiary-fixed:            #1c1b1a;
-  --color-on-tertiary-fixed-variant:    #484645;
+  --color-on-tertiary-container:        #7d2a13;
 
   --color-error:                        #ba1a1a;
   --color-error-container:              #ffdad6;
   --color-on-error:                     #ffffff;
   --color-on-error-container:           #93000a;
 
-  --color-on-background:                #1b1c1c;
-  --color-on-surface:                   #1b1c1c;
-  --color-on-surface-variant:           #5c5f60;
+  --color-on-background:                #1d1816;
+  --color-on-surface:                   #1d1816;
+  --color-on-surface-variant:           #5c524f;
 
-  --color-outline:                      #888b8b;
-  --color-outline-variant:              #dedad9;
+  --color-outline:                      #8d827e;
+  --color-outline-variant:              #e6dfd5;
 
-  --color-inverse-surface:              #303031;
-  --color-inverse-on-surface:           #f2f0f0;
-  --color-surface-tint:                 #5f5e5e;
+  --color-inverse-surface:              #362f2d;
+  --color-inverse-on-surface:           #fbfaf7;
+  --color-surface-tint:                 #7a6e6a;
 
   /* ─── Spacing ─── */
   --spacing-xs:               4px;
@@ -71,7 +69,7 @@
   --spacing-sidebar-width:    256px;
 
   /* ─── Border Radius ─── */
-  --radius-DEFAULT:   2px;
+  --radius-DEFAULT:   3px;
   --radius-sm:        4px;
   --radius-md:        6px;
   --radius-lg:        8px;
@@ -94,8 +92,8 @@
   }
 
   body {
-    background-color: #f5f3f2;
-    color: #1b1c1c;
+    background-color: #f9f6f0;
+    color: #1d1816;
     font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.5;
     min-height: 100dvh;
@@ -223,31 +221,45 @@
 /* Primary white card */
 .glass-card {
   background: #ffffff;
-  border: 1px solid #dedad9;
+  border: 1px solid #e6dfd5;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(27,28,28,0.05);
+  box-shadow: 0 1px 3px rgba(29,24,22,0.04);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(29,24,22,0.05);
 }
 
 /* Surface card (used for most content blocks) */
 .surface-card {
   background: #ffffff;
-  border: 1px solid #dedad9;
+  border: 1px solid #e6dfd5;
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(27,28,28,0.04);
+  box-shadow: 0 1px 2px rgba(29,24,22,0.03);
   padding: 24px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+.surface-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29,24,22,0.04);
 }
 
 /* Flat section card with no shadow */
 .section-card {
   background: #ffffff;
-  border: 1px solid #dedad9;
+  border: 1px solid #e6dfd5;
   border-radius: 8px;
   overflow: hidden;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.section-card:hover {
+  border-color: #cc5a37;
 }
 
 /* ─── Primary button ─── */
 .btn-primary {
-  background-color: #1b1b1b;
+  background-color: #1d1816;
   color: #ffffff;
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 16px;
@@ -266,14 +278,14 @@
   min-height: 54px;
 }
 .btn-primary:hover:not(:disabled) {
-  background-color: #2a2a2a;
-  box-shadow: 0 4px 20px rgba(27,27,27,0.18);
+  background-color: #cc5a37; /* Shifts to Claude Clay on Hover */
+  box-shadow: 0 4px 20px rgba(204,90,55,0.18);
   transform: translateY(-1px);
 }
 .btn-primary:active:not(:disabled) {
   transform: scale(0.99) translateY(0);
   box-shadow: none;
-  background-color: #111111;
+  background-color: #ab4424;
 }
 .btn-primary:disabled {
   opacity: 0.38;
@@ -284,25 +296,26 @@
 /* ─── Secondary button ─── */
 .btn-secondary {
   background-color: #ffffff;
-  color: #1b1c1c;
+  color: #1d1816;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
   padding: 8px 16px;
   border-radius: 6px;
-  border: 1px solid #dedad9;
+  border: 1px solid #e6dfd5;
   cursor: pointer;
-  transition: background-color 0.12s ease, border-color 0.12s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 .btn-secondary:hover {
-  background-color: #f5f3f2;
-  border-color: #b8b5b3;
+  background-color: #fbfaf7;
+  border-color: #cc5a37;
+  color: #cc5a37;
 }
 .btn-secondary:active {
-  background-color: #efeded;
+  background-color: #f4f0ea;
 }
 
 /* ─── Destructive text button ─── */
@@ -328,9 +341,9 @@
 /* ─── Textarea / Input ─── */
 .input-area {
   background-color: #ffffff;
-  border: 1px solid #dedad9;
+  border: 1px solid #e6dfd5;
   border-radius: 6px;
-  color: #1b1c1c;
+  color: #1d1816;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.6;
@@ -340,11 +353,11 @@
   width: 100%;
 }
 .input-area:focus {
-  border-color: #1b1b1b;
-  box-shadow: 0 0 0 3px rgba(27,27,27,0.07);
+  border-color: #cc5a37;
+  box-shadow: 0 0 0 3px rgba(204,90,55,0.07);
 }
 .input-area::placeholder {
-  color: #9a9d9d;
+  color: #8d827e;
 }
 
 /* ─── Section label ─── */
@@ -352,14 +365,14 @@
   font-family: 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 600;
-  color: #888b8b;
+  color: #8d827e;
   text-transform: uppercase;
   letter-spacing: 0.07em;
 }
 
 /* ─── Score Badges ─── */
 .badge-strong {
-  background: #1b1b1b;
+  background: #cc5a37;
   color: #ffffff;
   border-radius: 5px;
   padding: 4px 10px;
@@ -370,9 +383,9 @@
   white-space: nowrap;
 }
 .badge-good {
-  background: #efeded;
-  color: #1b1c1c;
-  border: 1px solid #dedad9;
+  background: #f4f0ea;
+  color: #1d1816;
+  border: 1px solid #e6dfd5;
   border-radius: 5px;
   padding: 4px 10px;
   font-family: 'Inter', sans-serif;
@@ -404,10 +417,6 @@
 }
 
 /* ─── Sidebar ─── */
-/* The sidebar is position:fixed, so it is removed from normal document flow.
-   Using display:block + margin-left on .main-content is the correct approach
-   for a fixed sidebar — CSS Grid auto-placement would put main in column 1
-   (256px) since all other grid items are also fixed (out of flow). */
 @media (min-width: 1024px) {
   .app-shell {
     display: block;
@@ -464,9 +473,9 @@
 .skill-pill {
   display: inline-flex;
   align-items: center;
-  background: #f5f3f2;
-  border: 1px solid #dedad9;
-  color: #1b1c1c;
+  background: #f4f0ea;
+  border: 1px solid #e6dfd5;
+  color: #1d1816;
   border-radius: 4px;
   padding: 4px 10px;
   font-family: 'Inter', sans-serif;
@@ -487,22 +496,22 @@
 
 /* ─── Score ring ─── */
 .score-ring-track {
-  stroke: #e4e2e2;
+  stroke: #e6dfd5;
 }
 .score-ring-fill {
-  stroke: #1b1b1b;
+  stroke: #cc5a37; /* Claude rust accent color */
   transition: stroke-dasharray 0.9s ease-out;
 }
 
 /* ─── Progress bar ─── */
 .progress-track {
-  background: #efeded;
+  background: #f4f0ea;
   border-radius: 3px;
   height: 3px;
   overflow: hidden;
 }
 .progress-fill {
-  background: #1b1b1b;
+  background: #cc5a37;
   height: 100%;
   border-radius: 3px;
   transition: width 0.7s ease-out;
@@ -514,7 +523,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  border-bottom: 1px solid #dedad9;
+  border-bottom: 1px solid #e6dfd5;
 }
 .list-row:last-child {
   border-bottom: none;
@@ -525,8 +534,8 @@
   width: 44px;
   height: 44px;
   border-radius: 6px;
-  background: #f5f3f2;
-  border: 1px solid #dedad9;
+  background: #f4f0ea;
+  border: 1px solid #e6dfd5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -534,5 +543,50 @@
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 14px;
   font-weight: 600;
-  color: #444748;
+  color: #5c524f;
 }
+
+/* ─── Splash Screen Animations ─── */
+@keyframes splashLogoFadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes splashTextFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes splashContainerFadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.97); }
+}
+
+.splash-container {
+  animation: splashContainerFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) 2.7s forwards;
+}
+
+.splash-logo {
+  animation: splashLogoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0s both;
+}
+
+.splash-wordmark {
+  animation: splashTextFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.splash-tagline {
+  animation: splashTextFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-container, .splash-logo, .splash-wordmark, .splash-tagline {
+    animation-duration: 0.1s !important;
+    animation-delay: 0s !important;
+    transform: none !important;
+  }
+  .splash-container {
+    animation-name: fadeOut !important;
+    animation-delay: 2.9s !important;
+  }
+}
+

@@ -1,4 +1,4 @@
-type Tab = 'dashboard' | 'evaluations' | 'candidates' | 'history';
+type Tab = 'landing' | 'dashboard' | 'evaluations' | 'candidates' | 'history';
 
 interface Props {
   currentTab: Tab;
@@ -6,11 +6,14 @@ interface Props {
 }
 
 const NAV_ITEMS: { tab: Tab; icon: string; label: string }[] = [
+  { tab: 'landing',     icon: 'home',                   label: 'Home' },
   { tab: 'dashboard',   icon: 'dashboard',              label: 'Dashboard' },
   { tab: 'evaluations', icon: 'add_circle',              label: 'Evaluate' },
   { tab: 'candidates',  icon: 'supervised_user_circle',  label: 'Candidates' },
   { tab: 'history',     icon: 'history',                 label: 'History' },
 ];
+
+import { Logo } from './Logo';
 
 export const Sidebar: React.FC<Props> = ({ currentTab, onTabChange }) => {
   return (
@@ -21,26 +24,10 @@ export const Sidebar: React.FC<Props> = ({ currentTab, onTabChange }) => {
     >
       {/* Brand */}
       <div
-        className="flex items-center gap-2.5 px-6 shrink-0"
+        className="flex items-center px-6 shrink-0"
         style={{ height: 60, borderBottom: '1px solid #dedad9' }}
       >
-        <span
-          className="material-symbols-outlined text-on-surface"
-          style={{ fontSize: 20, fontVariationSettings: "'FILL' 1" }}
-        >
-          bar_chart_4_bars
-        </span>
-        <span
-          style={{
-            fontFamily: 'Source Serif 4, Georgia, serif',
-            fontSize: 17,
-            fontWeight: 600,
-            color: '#1b1c1c',
-            letterSpacing: '-0.01em',
-          }}
-        >
-          HireLens
-        </span>
+        <Logo />
       </div>
 
       {/* Navigation */}
@@ -99,13 +86,34 @@ export const Sidebar: React.FC<Props> = ({ currentTab, onTabChange }) => {
             </span>
           </div>
           <div className="min-w-0">
-            <p style={{ fontSize: 13, fontWeight: 500, fontFamily: 'Inter, sans-serif', color: '#1b1c1c' }} className="truncate">
+            <p style={{ fontSize: 13, fontWeight: 500, fontFamily: 'Inter, sans-serif', color: '#1d1816' }} className="truncate">
               Recruiter
             </p>
-            <p style={{ fontSize: 11, fontFamily: 'Inter, sans-serif', color: '#5c5f60' }} className="truncate">
+            <p style={{ fontSize: 11, fontFamily: 'Inter, sans-serif', color: '#5c524f' }} className="truncate">
               HireLens AI
             </p>
           </div>
+        </div>
+        <div style={{ marginTop: 12, display: 'flex', alignItems: 'center' }}>
+          <a
+            href="https://github.com/Shivam122gupta"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5,
+              fontSize: 11,
+              fontFamily: 'Inter, sans-serif',
+              color: 'var(--color-secondary)',
+              textDecoration: 'none',
+              fontWeight: 500,
+            }}
+            className="hover:underline"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 13 }}>code</span>
+            by Shivam Gupta
+          </a>
         </div>
       </div>
     </aside>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 128" width="400" height="128">
+  <!-- Reusable Logo Icon - Left Side -->
+  <g transform="translate(0, 0)">
+    <!-- Outer Aperture/Lens Ring - Claude Rust Accent (#cc5a37) -->
+    <circle cx="64" cy="64" r="54" stroke="#cc5a37" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="32 12 64 12" />
+    
+    <!-- Outer Eye Shape Arcs - Deep Aubergine-Slate (#1d1816) -->
+    <path d="M18 64 C 40 28, 88 28, 110 64 C 88 100, 40 100, 18 64 Z" stroke="#1d1816" stroke-width="5" fill="none" stroke-linejoin="round" />
+    
+    <!-- Focus Rings / Precision Target Corners -->
+    <path d="M40 40 L34 40 L34 46" stroke="#1d1816" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M88 40 L94 40 L94 46" stroke="#1d1816" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M40 88 L34 88 L34 82" stroke="#1d1816" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M88 88 L94 88 L94 82" stroke="#1d1816" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- Inner Candidate Avatar -->
+    <circle cx="64" cy="54" r="12" fill="#1d1816" />
+    <path d="M46 80 C 46 70, 52 68, 64 68 C 76 68, 82 70, 82 80" stroke="#1d1816" stroke-width="4.5" fill="none" stroke-linecap="round" />
+    
+    <!-- Evaluation Checkmark -->
+    <path d="M68 64 L72 68 L80 60" stroke="#cc5a37" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Wordmark Text - Right Side -->
+  <text x="144" y="74" font-family="'Source Serif 4', Georgia, 'Times New Roman', serif" font-size="44" font-weight="600" fill="#1d1816" letter-spacing="-0.02em">HireLens</text>
+  <text x="146" y="98" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#8d827e" letter-spacing="0.06em" text-transform="uppercase">AI Recruitment</text>
+</svg>

@@ -10,10 +10,12 @@ import { CandidatesTab } from './components/CandidatesTab';
 import { EvaluationHistory } from './components/EvaluationHistory';
 import type { EvaluationRecord } from './components/EvaluationHistory';
 import { Navbar } from './components/Navbar';
+import { LandingPage } from './components/LandingPage';
+import { SplashScreen } from './components/SplashScreen';
 import { evaluateResumes } from './api/client';
 import type { EvaluationResponse, UploadedFile, CandidateResult } from './types';
 
-type Tab = 'dashboard' | 'evaluations' | 'candidates' | 'history';
+type Tab = 'landing' | 'dashboard' | 'evaluations' | 'candidates' | 'history';
 
 let fileIdCounter = 0;
 
@@ -49,7 +51,7 @@ function DashboardPage({
 }) {
   if (result && !loading) {
     return (
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 animate-fade-up">
         {/* "New evaluation" link */}
         <div className="flex justify-end">
           <button
@@ -74,7 +76,7 @@ function DashboardPage({
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 animate-fade-up">
       {/* Intro header */}
       {!loading && (
         <div style={{ paddingTop: 4 }}>
@@ -203,8 +205,9 @@ function DashboardPage({
 
 // ─── App Shell ─────────────────────────────────────────────────────────────
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
   // Navigation
-  const [currentTab, setCurrentTab] = useState<Tab>('evaluations');
+  const [currentTab, setCurrentTab] = useState<Tab>('landing');
   const [selectedCandidate, setSelectedCandidate] = useState<CandidateResult | null>(null);
 
   // Form state
@@ -360,6 +363,14 @@ export default function App() {
         <Navbar currentTab={currentTab} onTabChange={handleTabChange} />
       </div>
     );
+  }
+
+  if (showSplash) {
+    return <SplashScreen onComplete={() => setShowSplash(false)} />;
+  }
+
+  if (currentTab === 'landing') {
+    return <LandingPage onStart={() => setCurrentTab('evaluations')} />;
   }
 
   // ── Main app shell ────────────────────────────────────────────────────────
