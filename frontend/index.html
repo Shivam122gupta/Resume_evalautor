@@ -2,10 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- ── Favicon / Icons ──────────────────────────────────────── -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <!-- ── Viewport (safe-area for notched devices) ─────────────── -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+
+    <!-- ── PWA Manifest ─────────────────────────────────────────── -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- ── Theme Color ──────────────────────────────────────────── -->
+    <meta name="theme-color" content="#1d1816" />
+    <meta name="msapplication-TileColor" content="#1d1816" />
+    <meta name="msapplication-TileImage" content="/icons/icon-192.png" />
+
+    <!-- ── Apple PWA Meta ───────────────────────────────────────── -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="HireLens" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- ── SEO ──────────────────────────────────────────────────── -->
     <title>HireLens — AI-powered Resume Evaluator</title>
     <meta name="description" content="AI-powered resume screening and candidate ranking tool. Upload resumes and a job description to instantly rank candidates by match score." />
+    <meta name="keywords" content="resume evaluator, AI hiring, candidate ranking, resume screening, HR tool" />
+    <meta name="author" content="HireLens" />
+
+    <!-- ── Open Graph ───────────────────────────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HireLens — AI-powered Resume Evaluator" />
+    <meta property="og:description" content="AI-powered resume screening and candidate ranking. Upload resumes and a job description to instantly rank candidates by match score." />
+    <meta property="og:image" content="/icons/icon-512.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ── Twitter Card ─────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="HireLens — AI-powered Resume Evaluator" />
+    <meta name="twitter:description" content="AI-powered resume screening and candidate ranking." />
+    <meta name="twitter:image" content="/icons/icon-512.png" />
+
+    <!-- ── Fonts ────────────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />

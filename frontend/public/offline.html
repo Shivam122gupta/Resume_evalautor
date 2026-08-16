@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HireLens — Offline</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: #f9f6f0;
+        color: #1d1816;
+        font-family: 'Inter', system-ui, sans-serif;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .container {
+        text-align: center;
+        max-width: 360px;
+      }
+      .icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 24px;
+        background: #1d1816;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .icon svg { width: 36px; height: 36px; }
+      h1 {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 14px;
+        color: #5c524f;
+        line-height: 1.6;
+        margin-bottom: 28px;
+      }
+      button {
+        background: #1d1816;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 28px;
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      button:hover { background: #cc5a37; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="20" stroke="#cc5a37" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="12 4 24 4"/>
+          <path d="M7 24 C 15 11, 33 11, 41 24 C 33 37, 15 37, 7 24 Z" stroke="#f9f6f0" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          <circle cx="24" cy="20" r="4.5" fill="#f9f6f0"/>
+          <path d="M17 30 C 17 26.5, 19.5 25.5, 24 25.5 C 28.5 25.5, 31 26.5, 31 30" stroke="#f9f6f0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M25 24 L27 26 L30 22" stroke="#cc5a37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1>You're offline</h1>
+      <p>HireLens needs an internet connection to evaluate resumes and reach the AI backend. Please check your connection and try again.</p>
+      <button onclick="window.location.reload()">Try again</button>
+    </div>
+  </body>
+</html>

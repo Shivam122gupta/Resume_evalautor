@@ -12,8 +12,11 @@ import type { EvaluationRecord } from './components/EvaluationHistory';
 import { Navbar } from './components/Navbar';
 import { LandingPage } from './components/LandingPage';
 import { SplashScreen } from './components/SplashScreen';
+import { PWAInstallBanner, PWAUpdateToast } from './components/PWAPrompts';
 import { evaluateResumes } from './api/client';
 import type { EvaluationResponse, UploadedFile, CandidateResult } from './types';
+import { usePWA } from './hooks/usePWA';
+
 
 type Tab = 'landing' | 'dashboard' | 'evaluations' | 'candidates' | 'history';
 
@@ -205,6 +208,7 @@ function DashboardPage({
 
 // ─── App Shell ─────────────────────────────────────────────────────────────
 export default function App() {
+  const pwa = usePWA();
   const [showSplash, setShowSplash] = useState(true);
   // Navigation
   const [currentTab, setCurrentTab] = useState<Tab>('landing');
@@ -361,6 +365,12 @@ export default function App() {
 
         {/* Mobile bottom nav */}
         <Navbar currentTab={currentTab} onTabChange={handleTabChange} />
+
+        {/* PWA: Update notification toast */}
+        <PWAUpdateToast pwa={pwa} />
+
+        {/* PWA: Install prompt banner */}
+        <PWAInstallBanner pwa={pwa} />
       </div>
     );
   }
@@ -518,6 +528,12 @@ export default function App() {
 
       {/* Mobile bottom nav */}
       <Navbar currentTab={currentTab} onTabChange={handleTabChange} />
+
+      {/* PWA: Update notification toast */}
+      <PWAUpdateToast pwa={pwa} />
+
+      {/* PWA: Install prompt banner */}
+      <PWAInstallBanner pwa={pwa} />
     </div>
   );
 }
