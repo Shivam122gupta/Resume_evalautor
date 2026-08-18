@@ -191,19 +191,18 @@ def parse_job_description(job_description: str, groq_client, model: str) -> JobD
     """
     Parse a raw job description string into a structured JobD object.
     Preserved logic from resume_analyzer.py — uses Groq JSON mode.
-    Token-budget fix: compact system prompt, trimmed JD text, reduced completion tokens.
+    Token-budget fix: compact system prompt, trimmed JD text, increased completion tokens.
     """
     # Guard JD length
     jd_text = job_description[:_JD_TEXT_CHAR_LIMIT] if len(job_description) > _JD_TEXT_CHAR_LIMIT else job_description
 
-    # Compact system prompt — no inline schema dump, fields described tersely
+    # Compact system prompt — no explanations, reasoning, or markdown format
     system_prompt = (
         "You are an HR assistant. Extract structured info from the job description.\n"
-        "Return ONLY valid JSON with these keys:\n"
-        "  role (string), required_skills (list), preferred_skills (list),\n"
-        "  minimum_experience (float or null), education_requirements (list),\n"
-        "  responsibilities (list).\n"
-        "Rules: fill with real info only; null for missing experience; empty list if absent."
+        "Return ONLY a raw JSON object with these keys:\n"
+        "role (string), required_skills (list of strings), preferred_skills (list of strings), "
+        "minimum_experience (float or null), education_requirements (list of strings), responsibilities (list of strings).\n"
+        "No markdown code blocks, no formatting, no explanations, no reasoning."
     )
     user_prompt = f"Job description:\n\n{jd_text}"
 
@@ -215,7 +214,7 @@ def parse_job_description(job_description: str, groq_client, model: str) -> JobD
     from app.services.llm_service import llm_service
     job_data = llm_service.chat_json(
         messages=messages,
-        max_completion_tokens=500,
+        max_completion_tokens=4096,
         operation_name="parse_job_description",
     )
     logger.info(
